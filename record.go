@@ -39,6 +39,8 @@ type RegionMeta struct {
 	GeoRegion []string `json:"georegion,omitempty"`
 	Country   []string `json:"country,omitempty"`
 	USState   []string `json:"us_state,omitempty"`
+	Latitude  []string `json:"latitude,omitempty"`
+	Longitude []string `json:"longitude,omitempty"`
 	Up        bool     `json:"up,omitempty"`
 }
 
