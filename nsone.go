@@ -84,13 +84,16 @@ func (c APIClient) doHTTP(method string, uri string, rbody []byte) ([]byte, int,
 		return body, 510, err
 	}
 	req.Header.Add("X-NSONE-Key", c.ApiKey)
+	if c.debug {
+		log.Printf("[DEBUG] HTTP Request: %+v", req)
+	}
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
 		return body, 510, err
 	}
 	if c.debug {
-		log.Println(resp)
+		log.Printf("[DEBUG] HTTP Response: %+v", resp)
 	}
 	body, _ = ioutil.ReadAll(resp.Body)
 	resp.Body.Close()
