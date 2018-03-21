@@ -2,6 +2,7 @@ package nsone
 
 import (
 	"bytes"
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -87,7 +88,7 @@ func (c APIClient) doHTTP(method string, uri string, rbody []byte) ([]byte, int,
 	if c.debug {
 		log.Printf("[DEBUG] HTTP Request: %+v", req)
 	}
-	client := &http.Client{}
+	client := &http.Client{Transport: &http.Transport{TLSNextProto: make(map[string]func(authority string, c *tls.Conn) http.RoundTripper)}}
 	resp, err := client.Do(req)
 	if err != nil {
 		return body, 510, err
